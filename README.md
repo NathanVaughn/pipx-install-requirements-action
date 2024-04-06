@@ -6,11 +6,13 @@ them up-to-date.
 
 ## Usage
 
+`requirements.txt`:
 ```txt
 poetry==1.8.2
 vscode-task-runner==1.1.0
 ```
 
+GitHub Action:
 ```yml
 jobs:
   build:
