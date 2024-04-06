@@ -3,8 +3,8 @@
 This is a GitHub Action to install tools with `pipx` from a `requirements.txt` file.
 This will cache the installed tools and downloaded dependencies.
 
-This allows you to have consistent tool versions, leverage dependabot to keep
-them up-to-date, and reduce install times and downloads with caching.
+This allows you to have consistent tool versions and leverage dependabot to keep
+them up-to-date.
 
 ## Usage
 
@@ -24,5 +24,5 @@ jobs:
       - name: Install poetry/vscode-task-runner
         uses: NathanVaughn/pipx-install-requirements-action@main
         with:
-            requirements_file: requirements.txt
+          requirements_file: requirements.txt
 ```

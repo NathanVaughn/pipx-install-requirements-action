@@ -11,32 +11,6 @@ branding:
 runs:
   using: "composite"
   steps:
-    - name: Get cache directories
-      id: cache_dirs
-      shell: bash
-      run: python ${{ github.action_path }}/get_cache_dirs.py
-
-    - name: Cache pipx installations
-      uses: actions/cache@v4
-      with:
-        path: ${{ steps.cache_dirs.outputs.pipx }}
-        key: pipx-${{ runner.os }}-${{ hashFiles(inputs.requirements_file) }}
-        restore-keys: |
-          pipx-${{ runner.os }}-
-          pipx-
-
-    - name: Cache pipx pip packages
-      uses: actions/cache@v4
-      with:
-        path: ${{ steps.cache_dirs.outputs.pip }}
-        key: pip-${{ runner.os }}-${{ hashFiles(inputs.requirements_file) }}
-        restore-keys: |
-          pip-${{ runner.os }}-
-          pip-
-
     - name: Install tools
       shell: bash
       run: python ${{ github.action_path }}/action.py ${{ inputs.requirements_file }}
-      env:
-        PIPX_HOME: ${{ steps.cache_dirs.outputs.pipx }}
-        PIP_CACHE_DIR: ${{ steps.cache_dirs.outputs.pip }}

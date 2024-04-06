@@ -33,9 +33,6 @@ def main(requirements_file: str) -> None:
         if proc.returncode != 0:
             sys.exit(proc.returncode)
 
-    # ensure that packages that were cached still are accessible
-    subprocess.run(["pipx", "ensurepath"])
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
