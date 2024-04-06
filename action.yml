@@ -13,8 +13,8 @@ runs:
   steps:
     - name: Get cache directories
       id: cache_dirs
-      run: get_cache_dirs.py
-      shell: python
+      shell: bash
+      run: python ${{ github.action_path }}/get_cache_dirs.py
 
     - name: Cache pipx installations
       uses: actions/cache@v4
@@ -35,8 +35,8 @@ runs:
           pip-
 
     - name: Install tools
-      run: action.py ${{ inputs.requirements_file }}
-      shell: python
+      shell: bash
+      run: python ${{ github.action_path }}/action.py ${{ inputs.requirements_file }}
       env:
         PIP_CACHE_DIR: ${{ steps.cache_dirs.outputs.pip }}
 
