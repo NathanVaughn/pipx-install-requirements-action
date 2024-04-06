@@ -1,8 +1,6 @@
 # pipx-install-requirements-action
 
 This is a GitHub Action to install tools with `pipx` from a `requirements.txt` file.
-This will cache the installed tools and downloaded dependencies.
-
 This allows you to have consistent tool versions and leverage dependabot to keep
 them up-to-date.
 
