@@ -19,7 +19,7 @@ runs:
     - name: Cache pipx installations
       uses: actions/cache@v4
       with:
-        path: ${{ steps.cache_dirs-venv.outputs.pipx }}
+        path: ${{ steps.cache_dirs.outputs.pipx }}
         key: pipx-${{ runner.os }}-${{ hashFiles(inputs.requirements_file) }}
         restore-keys: |
           pipx-${{ runner.os }}-
