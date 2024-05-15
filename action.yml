@@ -1,16 +1,35 @@
 name: Pipx install from requirements.txt
-description: 'Install multiples tools using pipx from a requirements.txt file'
+description: 'Install multiples tools using pipx from a requirements.txt file with caching'
 inputs:
   requirements_file:
     description: 'Path to the requirements.txt file'
     required: false
     default: requirements.txt
+  other_lock_files:
+    description: 'Any other lock files to include for dependency caching'
+    required: false
+
 branding:
   icon: package
   color: blue
+
 runs:
   using: "composite"
   steps:
+    - name: Get current Python version
+      id: get-python-version
+      shell: bash
+      run: echo "active_python_version=$(python ${{ github.action_path }}/version.py)" >> $GITHUB_OUTPUT
+
+    - name: Setup Python ${{ steps.get-python-version.outputs.active_python_version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ steps.get-python-version.outputs.active_python_version }}
+        cache: pip
+        cache-dependency-path: |
+          ${{ inputs.requirements_file }}
+          ${{ inputs.other_lock_files }}
+
     - name: Install tools
       shell: bash
       run: python ${{ github.action_path }}/action.py ${{ inputs.requirements_file }}
