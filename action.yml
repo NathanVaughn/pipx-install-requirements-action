@@ -27,7 +27,7 @@ runs:
       run: echo "cache_dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
     - name: Cache Pip Dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ${{ steps.pip.outputs.cache_dir }}
         key: pip-${{ steps.python.outputs.version }}-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles(inputs.requirements_file, inputs.other_lock_files) }}
